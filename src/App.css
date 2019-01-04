@@ -1,0 +1,25 @@
+.dashboard {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+	background: url('/img/background.svg') no-repeat center center/ cover;
+}
+
+.default {
+  height: 100%;
+  width: 100%;
+}
+
+.homeButton {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  height: 50px;
+  width: 50px;
+  opacity: .8;
+	background: url('/img/icon_home.svg') no-repeat center center/ cover;
+}
+
+div {
+  color: #303030;
+}
