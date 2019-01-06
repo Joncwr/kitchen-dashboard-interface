@@ -1,0 +1,27 @@
+.input:focus {
+}
+
+.input {
+  height: 50px;
+  width: 100px;
+}
+
+.form-textarea {
+  width: 300px;
+  height: 125px;
+  border-radius: 8px;
+  resize: none;
+  padding: 10px;
+  font-size: 30px;
+  font-family: 'Concert One';
+  overflow: hidden;
+  border-color: none;
+  border: none;
+  background-color: rgba(0,0,0,.1);
+  border: 5px solid transparent;
+}
+
+.form-textarea:focus {
+  background-color: white;
+  border: 5px solid #303030;
+}

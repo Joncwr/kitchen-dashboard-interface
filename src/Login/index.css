@@ -1,0 +1,30 @@
+.login {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-inputContainer {
+  display: flex;
+}
+
+.login-inputContainer-input {
+  height: 60px;
+  width: 250px;
+  border-radius: 18px;
+  margin: 0 20px;
+  border: 5px solid #303030;
+  font-size: 30px;
+  font-family: 'Staatliches';
+  padding: 0 10px;
+  text-align: center;
+}
+
+.login-button {
+  height: 150px;
+  width: 150px;
+  background: url('/img/icon_arrow_broccoli.png') center center / contain;
+}

@@ -5,18 +5,9 @@ import Dotdotdot from 'react-dotdotdot'
 import './index.css'
 
 class OrderComponent extends React.Component {
-  constructor(){
-    super()
-
-    this.state = {
-
-    }
-
-  }
-
   renderComments() {
-    let { comments } = this.props.data
-    if (comments) {
+    let { comments } = this.props
+    if (comments.length > 0) {
       let renderCommentsArr = []
       comments.forEach((data,index) => {
           if (index < 3) {
@@ -39,31 +30,29 @@ class OrderComponent extends React.Component {
   }
 
   renderPeriodColor(period) {
-    if(period){
-      switch (period) {
-        case 'Breakfast':
-          return '#ff9933'
-        case 'Lunch':
-          return '#cc3300'
-        case 'Dinner':
-          return '#802b00'
-        case 'Urgent':
-          return '#e60000'
-        default:
-          return '#00e699'
-      }
+    switch (period) {
+      case 'Breakfast':
+        return '#ff9933'
+      case 'Lunch':
+        return '#cc3300'
+      case 'Dinner':
+        return '#802b00'
+      case 'Urgent':
+        return '#e60000'
+      default:
+        return '#00e699'
     }
   }
 
   render() {
-    let  { name, deadline, period } = this.props.data
-    let date = moment(deadline).format('D MMM, ddd')
+    let  { date, itemName, period } = this.props
+    let formattedDate = moment(date).format('D MMM, ddd')
     return (
       <div className="orderComponent">
         <div className="orderComponent-wrapper">
           <div className="orderComponent-headerContainer">
             <div className="orderComponent-headerContainer-text">
-              {date}
+              {formattedDate}
             </div>
             <div className="orderComponent-headerContainer-period">
               <div className="orderComponent-headerContainer-period-container" style={{backgroundColor: this.renderPeriodColor(period)}}>
@@ -76,7 +65,7 @@ class OrderComponent extends React.Component {
           <div className="orderComponent-itemContainer">
             <div className="orderComponent-itemContainer-text">
               <Dotdotdot clamp={3}>
-                {name}
+                {itemName}
               </Dotdotdot>
             </div>
           </div>
