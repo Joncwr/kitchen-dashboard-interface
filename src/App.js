@@ -4,7 +4,8 @@ import createHistory from 'history/createBrowserHistory'
 
 import Start from './Start'
 import Login from './Login'
-import Ordering from './components/Ordering'
+import OrderingForm from './components/OrderingForm'
+import OrderingOptions from './components/OrderingOptions'
 import RecipeViewer from './components/RecipeViewer'
 
 import './App.css';
@@ -33,8 +34,13 @@ class App extends Component {
               history={history}
             />
           )} />
-          <Route exact path="/ordering" render={() => (
-            <Ordering
+          <Route exact path="/orderingoptions" render={() => (
+            <OrderingOptions
+              history={history}
+            />
+          )} />
+          <Route exact path="/orderingform" render={() => (
+            <OrderingForm
               history={history}
             />
           )} />

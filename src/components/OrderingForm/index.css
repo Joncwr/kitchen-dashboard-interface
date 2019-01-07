@@ -8,6 +8,16 @@
   align-items: center;
 }
 
+.ordering-back {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  height: 50px;
+  width: 50px;
+  opacity: .8;
+  background: url('/img/icon_back.svg') no-repeat center center/ cover;
+}
+
 .ordering-previewWrapper {
   flex: 1;
   display: flex;

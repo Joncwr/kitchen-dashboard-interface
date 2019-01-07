@@ -5,10 +5,6 @@ import './index.css'
 class Start extends React.Component {
   constructor(){
     super()
-
-    this.state = {
-
-    }
     this.onClick=this.onClick.bind(this)
   }
 
@@ -19,7 +15,7 @@ class Start extends React.Component {
   render() {
     return (
       <div className="start">
-        <div className="start-orderingContainer" onClick={() => this.onClick('ordering')}>
+        <div className="start-orderingContainer" onClick={() => this.onClick('orderingoptions')}>
           <div className="start-orderingContainer-alignMiddle">
             <div className="start-orderingContainer-alignMiddle-icon" />
             <div className="start-orderingContainer-alignMiddle-text">

@@ -1,8 +1,9 @@
 {
-  "name": "kitchen-dashboard-frontend",
+  "name": "kitchen-dashboard-interface",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.18.0",
     "history": "^4.7.2",
     "moment": "^2.23.0",
     "react": "^16.7.0",

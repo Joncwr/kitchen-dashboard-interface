@@ -3,6 +3,10 @@ let login = [
     name: 'Jon',
     password: 'sibeizai'
   },
+  {
+    name: 'Crystal',
+    password: 'imcute'
+  },
 ]
 
 module.exports = {
@@ -10,12 +14,10 @@ module.exports = {
     return new Promise((resolve, reject) => {
       login.forEach((data,index) => {
         if (data.name === username && data.password === password) {
-          resolve()
-        }
-        else {
-          reject()
+          resolve('login!')
         }
       })
+      reject('login failed')
     })
   }
 }

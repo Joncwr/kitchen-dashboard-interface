@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 
 import OrderComponent from './OrderComponent'
 import OrderForm from './OrderForm'
@@ -22,15 +23,27 @@ class Ordering extends React.Component {
   }
 
   onSubmit() {
-    let orderDict = {
-      name: JSON.parse(localStorage.getItem('account')).username,
-      order: {
-        name: this.state.itemName,
-        period: this.state.period,
-        comments: this.state.comments,
+    if (this.state.itemName !== '' && this.state.period !== '') {
+      let orderDict = {
+        name: JSON.parse(localStorage.getItem('account')).username,
+        order: {
+          name: this.state.itemName,
+          period: this.state.period,
+          comments: this.state.comments,
+        }
       }
+
+      axios.post(process.env.REACT_APP_SERVER + '/sendOrder', orderDict)
+      .then(res => {
+        console.log(res.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+      this.props.history.push('/orderingoptions')
+      // console.log(orderDict);
     }
-    console.log(orderDict);
   }
 
   handleChange(event, index) {
@@ -116,6 +129,7 @@ class Ordering extends React.Component {
   render() {
     return (
       <div className="default">
+        <div className="ordering-back" onClick={() => this.props.history.goBack()}/>
         <div className="ordering">
           {this.renderOrderForm()}
           {this.renderViewer()}
