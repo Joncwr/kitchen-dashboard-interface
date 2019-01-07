@@ -54,6 +54,7 @@ class Login extends React.Component {
             name='username'
             value={this.state.username}
             onChange={this.handleChange}
+            autoComplete='off'
           />
           <input
             className="login-inputContainer-input"
