@@ -28,6 +28,7 @@ class Ordering extends React.Component {
         name: JSON.parse(localStorage.getItem('account')).username,
         order: {
           name: this.state.itemName,
+          date: this.state.date,
           period: this.state.period,
           comments: this.state.comments,
         }

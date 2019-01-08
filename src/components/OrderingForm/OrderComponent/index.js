@@ -6,26 +6,28 @@ import './index.css'
 
 class OrderComponent extends React.Component {
   renderComments() {
-    let { comments } = this.props
-    if (comments.length > 0) {
-      let renderCommentsArr = []
-      comments.forEach((data,index) => {
-          if (index < 3) {
-            renderCommentsArr.push(
-              <div className="orderComponent-comments-container" key={index}>
-                <div className="orderComponent-comments-container-text">
-                  {data}
+    let { comments } = this.props.data
+    if (comments) {
+      if (comments.length > 0) {
+        let renderCommentsArr = []
+        comments.forEach((data,index) => {
+            if (index < 3) {
+              renderCommentsArr.push(
+                <div className="orderComponent-comments-container" key={index}>
+                  <div className="orderComponent-comments-container-text">
+                    {data}
+                  </div>
                 </div>
-              </div>
-            )
-          }
-      })
-      return (
-        <div className="orderComponent-comments">
-          <div className="orderComponent-comments-divider" />
-          {renderCommentsArr}
-        </div>
-      )
+              )
+            }
+        })
+        return (
+          <div className="orderComponent-comments">
+            <div className="orderComponent-comments-divider" />
+            {renderCommentsArr}
+          </div>
+        )
+      }
     }
   }
 
@@ -45,7 +47,8 @@ class OrderComponent extends React.Component {
   }
 
   render() {
-    let  { date, itemName, period } = this.props
+    console.log(this.props.data);
+    let  { date, name, period } = this.props.data
     let formattedDate = moment(date).format('D MMM, ddd')
     return (
       <div className="orderComponent">
@@ -65,7 +68,7 @@ class OrderComponent extends React.Component {
           <div className="orderComponent-itemContainer">
             <div className="orderComponent-itemContainer-text">
               <Dotdotdot clamp={3}>
-                {itemName}
+                {name}
               </Dotdotdot>
             </div>
           </div>

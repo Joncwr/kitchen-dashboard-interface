@@ -7,6 +7,7 @@ import Login from './Login'
 import OrderingForm from './components/OrderingForm'
 import OrderingOptions from './components/OrderingOptions'
 import RecipeViewer from './components/RecipeViewer'
+import ViewOrder from './components/ViewOrder'
 
 import './App.css';
 
@@ -36,6 +37,11 @@ class App extends Component {
           )} />
           <Route exact path="/orderingoptions" render={() => (
             <OrderingOptions
+              history={history}
+            />
+          )} />
+          <Route exact path="/vieworder" render={() => (
+            <ViewOrder
               history={history}
             />
           )} />

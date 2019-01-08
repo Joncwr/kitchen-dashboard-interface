@@ -13,6 +13,9 @@ class OrderingOptions extends React.Component {
     if (action === 'addOrder') {
       this.props.history.push('orderingform')
     }
+    else if (action === 'viewOrder') {
+      this.props.history.push('viewOrder')
+    }
     else if (action === 'deleteLastOrder') {
       let userDict = {
         name: JSON.parse(localStorage.getItem('account')).username
@@ -30,19 +33,27 @@ class OrderingOptions extends React.Component {
   render() {
     return (
       <div className="start">
-        <div className="start-orderingContainer" onClick={() => this.onClick('addOrder')}>
-          <div className="start-orderingContainer-alignMiddle">
-            <div className="start-orderingContainer-alignMiddle-icon orderingOptions-addOrder" />
-            <div className="start-orderingContainer-alignMiddle-text">
+        <div className="default-buttonContainer" onClick={() => this.onClick('addOrder')}>
+          <div className="default-buttonContainer-alignMiddle">
+            <div className="default-buttonContainer-alignMiddle-icon orderingOptions-addOrder" />
+            <div className="default-buttonContainer-alignMiddle-text">
               Add Order
             </div>
           </div>
         </div>
-        <div className="start-recipeViewer" onClick={() => this.onClick('deleteLastOrder')}>
-          <div className="start-recipeViewer-alignMiddle">
-            <div className="start-recipeViewer-alignMiddle-icon orderingOptions-deleteLastOrder" />
-            <div className="start-recipeViewer-alignMiddle-text">
+        <div className="default-buttonContainer" onClick={() => this.onClick('deleteLastOrder')}>
+          <div className="default-buttonContainer-alignMiddle">
+            <div className="default-buttonContainer-alignMiddle-icon orderingOptions-deleteLastOrder" />
+            <div className="default-buttonContainer-alignMiddle-text">
               Delete Last Order
+            </div>
+          </div>
+        </div>
+        <div className="default-buttonContainer" onClick={() => this.onClick('viewOrder')}>
+          <div className="default-buttonContainer-alignMiddle">
+            <div className="default-buttonContainer-alignMiddle-icon orderingOptions-viewOrder" />
+            <div className="default-buttonContainer-alignMiddle-text">
+              View Order
             </div>
           </div>
         </div>

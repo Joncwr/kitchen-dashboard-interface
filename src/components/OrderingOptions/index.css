@@ -1,7 +1,11 @@
-.start-orderingContainer-alignMiddle-icon.orderingOptions-addOrder {
+.default-buttonContainer-alignMiddle-icon.orderingOptions-addOrder {
   background: url('/img/icon_add_order.svg') center center / contain;
 }
 
-.start-recipeViewer-alignMiddle-icon.orderingOptions-deleteLastOrder {
+.default-buttonContainer-alignMiddle-icon.orderingOptions-deleteLastOrder {
   background: url('/img/icon_delete_order.svg') center center / contain;
+}
+
+.default-buttonContainer-alignMiddle-icon.orderingOptions-viewOrder {
+  background: url('/img/icon_view.svg') center center / contain;
 }
