@@ -1,6 +1,6 @@
 .usersComponent {
   flex: .25;
-  padding: 0 15px ;
+  padding: 0 15px;
 }
 
 .usersComponent-nameContainer {
@@ -18,4 +18,121 @@
   width: 100%;
   height: 100%;
   display: inline-block;
+  position: relative;
+}
+
+.usersComponent-orderComponentContainer-wrapper {
+  margin-top: 10px;
+  position: relative;
+  border-radius: 12px;
+  box-shadow: 0 2px 30px 0 rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  z-index: 1000,
+}
+
+.usersComponent-orderComponentContainer-editMode--overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: red;
+}
+
+.usersComponent-orderComponentContainer-editMode {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: rgba(102, 102, 102,.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.usersComponent-orderComponentContainer-editMode-wrapper {
+  width: 100%;
+  height: 100px;
+  overflow: hidden;
+}
+
+.usersComponent-orderComponentContainer-editMode-animationContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.usersComponent-orderComponentContainer-editMode-animationContainer.isAnimated {
+  -webkit-animation: translateOptions .6s ease-out forwards;
+}
+
+.usersComponent-orderComponentContainer-editMode-confirmation {
+  display: flex;
+  flex-direction: row;
+}
+
+.usersComponent-orderComponentContainer-editMode-container,
+.usersComponent-orderComponentContainer-editMode-confirmation-confirmContainer,
+.usersComponent-orderComponentContainer-editMode-confirmation-declineContainer {
+  height: 75px;
+  width: 75px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+}
+
+.usersComponent-orderComponentContainer-editMode-confirmation-confirmContainer {
+  background-color: #66ff66;
+  margin: 0 40px;
+}
+
+.usersComponent-orderComponentContainer-editMode-confirmation-declineContainer {
+  background-color: #ff4d4d;
+  margin: 0 40px;
+}
+
+
+.usersComponent-orderComponentContainer-editMode-container {
+  background-color: #ff4d4d;
+  margin-bottom: 20px;
+}
+
+.usersComponent-orderComponentContainer-editMode-container-icon,
+.usersComponent-orderComponentContainer-editMode-confirmation-confirmContainer-icon,
+.usersComponent-orderComponentContainer-editMode-confirmation-declineContainer-icon {
+  height: 50px;
+  width: 50px;
+  background-color: white;
+}
+
+.usersComponent-orderComponentContainer-editMode-container-icon {
+	mask: url('/img/icon_delete.svg') no-repeat center center/ cover;
+}
+
+.usersComponent-orderComponentContainer-editMode-confirmation-confirmContainer-icon {
+  mask: url('/img/icon_accept.svg') no-repeat center center/ cover;
+}
+
+.usersComponent-orderComponentContainer-editMode-confirmation-declineContainer-icon {
+  mask: url('/img/icon_cancel.svg') no-repeat center center/ cover;
+}
+
+@keyframes translateOptions {
+  0% {
+    transform: translateY(3px)
+  }
+
+  15% {
+    transform: translateY(13px)
+  }
+
+  85% {
+    transform: translateY(-100px)
+  }
+
+  100% {
+    transform: translateY(-93px)
+  }
 }

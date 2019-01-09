@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 
 import UsersComponent from './UsersComponent'
 
@@ -9,24 +10,52 @@ class ViewOrder extends React.Component {
     super()
 
     this.state = {
-
+      isEditable: false,
+      isOptionsAnimated: false,
+      data: '',
     }
+    this.setEditableState=this.setEditableState.bind(this)
+    this.setOptionsAnimated=this.setOptionsAnimated.bind(this)
+  }
 
+  componentDidMount() {
+    let name = {name: JSON.parse(localStorage.getItem('account')).username}
+    axios.post(process.env.REACT_APP_SERVER + '/getOrders', name)
+    .then(res => {
+      this.setState({data: res.data})
+    })
+    .catch(err => console.log(err))
   }
 
   renderPreview() {
-    return (
-      <div className="viewOrder-right-container">
-        <UsersComponent
-          data={testData}
-        />
-      </div>
-    )
+    if (this.state.data) {
+      return (
+        <div className="viewOrder-right-container">
+          <UsersComponent
+            setEditableState={this.setEditableState}
+            isEditable={this.state.isEditable}
+            setOptionsAnimated={this.setOptionsAnimated}
+            isOptionsAnimated={this.state.isOptionsAnimated}
+            data={this.state.data}
+          />
+        </div>
+      )
+    }
+  }
+
+  setEditableState(state) {
+    if (state === false) this.setState({isOptionsAnimated: false})
+    this.setState({isEditable: state})
+  }
+
+  setOptionsAnimated(state) {
+    this.setState({isOptionsAnimated: state})
   }
 
   render() {
     return (
-      <div className="viewOrder">
+      <div className="viewOrder" onMouseDown={() => this.setEditableState(false)}>
+        <div className="ordering-back" onClick={() => this.props.history.goBack()}/>
         <div className="viewOrder-left">
 
         </div>
@@ -39,25 +68,3 @@ class ViewOrder extends React.Component {
 }
 
 export default ViewOrder
-
-let testData = {
-  name: "Jon",
-  orders: [
-    {
-      name: "awdwa",
-      period: "awda",
-      comments: [],
-      date: "2019-01-09T16:00:00.000Z"
-    }, {
-      name: "awdawdaw",
-      period: "awdwad",
-      comments: [],
-      date: "2019-01-09T16:00:00.000Z"
-    }, {
-      name: "wadwa",
-      period: "dawd",
-      comments: ["awd", "awd", "awd"],
-      date: "2019-01-09T16:00:00.000Z"
-    }
-  ]
-}

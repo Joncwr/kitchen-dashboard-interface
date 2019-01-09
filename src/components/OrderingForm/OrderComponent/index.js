@@ -47,7 +47,6 @@ class OrderComponent extends React.Component {
   }
 
   render() {
-    console.log(this.props.data);
     let  { date, name, period } = this.props.data
     let formattedDate = moment(date).format('D MMM, ddd')
     return (
