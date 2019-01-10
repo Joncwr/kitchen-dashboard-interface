@@ -69,11 +69,6 @@ class OrderForm extends React.Component {
     return (
       <form>
         <div className="form">
-          <div className="form-savedOrders">
-            <div className="form-savedOrders-button" onClick={this.props.viewSavedOrders}>
-              Saved Orders
-            </div>
-          </div>
           <div className="form-date">
             <div className="form-header">
               Date:

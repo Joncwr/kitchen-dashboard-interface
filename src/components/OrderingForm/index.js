@@ -196,11 +196,22 @@ class Ordering extends React.Component {
     )
   }
 
+  renderSavedOrders() {
+    return (
+      <div className="ordering-savedOrders">
+        <div className="ordering-savedOrders-button" onClick={this.viewSavedOrders}>
+          Saved Orders
+        </div>
+      </div>
+    )
+  }
+
   render() {
     return (
       <div className="default">
         <div className="ordering-back" onClick={() => this.props.history.goBack()}/>
         <div className="ordering">
+          {this.renderSavedOrders()}
           {this.renderOrderForm()}
           {this.renderViewer()}
         </div>
