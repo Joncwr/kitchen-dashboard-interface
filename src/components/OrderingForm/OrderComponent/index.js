@@ -6,7 +6,7 @@ import './index.css'
 
 class OrderComponent extends React.Component {
   renderComments() {
-    let { comments } = this.props.data
+    let { comments } = this.props
     if (comments) {
       if (comments.length > 0) {
         let renderCommentsArr = []
@@ -47,7 +47,7 @@ class OrderComponent extends React.Component {
   }
 
   render() {
-    let  { date, name, period } = this.props.data
+    let  { date, name, period } = this.props
     let formattedDate = moment(date).format('D MMM, ddd')
     return (
       <div className="orderComponent">

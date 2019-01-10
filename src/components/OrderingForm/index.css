@@ -28,8 +28,10 @@
 
 .ordering-previewContainer {
   width: 550px;
+  height: 400px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   border: 10px solid #303030;
   padding: 50px 30px 65px 30px;
@@ -51,19 +53,36 @@
   font-style: italic;
 }
 
-.ordering-sendOrder {
+.ordering-options {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 150px;
+  padding: 0 100px;
+  box-sizing: border-box;
+}
+
+.ordering-options-container-save,
+.ordering-options-container-send {
   height: 80px;
   width: 300px;
   border-radius: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 250px;
-  background-color: #ff9933;
-  border: 5px solid #802b00;
   color: #fff;
   font-size: 35px;
   font-family: 'Staatliches';
+}
+
+.ordering-options-container-save {
+  border: 5px solid #008055;
+  background-color: #00e699;
+}
+
+.ordering-options-container-send {
+  border: 5px solid #802b00;
+  background-color: #ff9933;
 }
 
 .orderForm {

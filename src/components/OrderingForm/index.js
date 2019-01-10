@@ -12,7 +12,7 @@ class Ordering extends React.Component {
 
     this.state = {
       date: new Date(),
-      itemName: '',
+      name: '',
       period: '',
       comments: [],
     }
@@ -23,11 +23,11 @@ class Ordering extends React.Component {
   }
 
   onSubmit() {
-    if (this.state.itemName !== '' && this.state.period !== '') {
+    if (this.state.name !== '' && this.state.period !== '') {
       let orderDict = {
         name: JSON.parse(localStorage.getItem('account')).username,
         order: {
-          name: this.state.itemName,
+          name: this.state.name,
           date: this.state.date,
           period: this.state.period,
           comments: this.state.comments,
@@ -52,8 +52,8 @@ class Ordering extends React.Component {
     let value = event.target.value
     let strLength = event.target.value.length
 
-    if (name === 'itemName') {
-      if (strLength < 80) {
+    if (name === 'name') {
+      if (strLength < 70) {
         this.setState({[name]: value})
       }
     }
@@ -85,6 +85,19 @@ class Ordering extends React.Component {
     this.setState({date: date})
   }
 
+  onSave() {
+  let orderDict = {
+    date: this.state.date,
+    name: this.state.name,
+    period: this.state.period,
+    comments: this.state.comments,
+  }
+
+  console.log(orderDict);
+    if (this.state.name !== '' && this.state.period !== '') {
+    }
+  }
+
   renderViewer() {
     return (
       <div className="ordering-previewWrapper">
@@ -92,9 +105,8 @@ class Ordering extends React.Component {
           <div className="ordering-previewContainer-header">Preview Box</div>
           <div className="ordering-previewContainer-wrapper">
             <OrderComponent
-              data={testData}
               date={this.state.date}
-              itemName={this.state.itemName}
+              name={this.state.name}
               period={this.state.period}
               comments={this.state.comments}
             />
@@ -103,8 +115,13 @@ class Ordering extends React.Component {
         <div className="ordering-extraText">
           *Please always view the web app after posting to see if theres any cutoff.*
         </div>
-        <div className="ordering-sendOrder" onClick={() => this.onSubmit()}>
-          Send order!
+        <div className="ordering-options">
+          <div className="ordering-options-container-save" onClick={() => this.onSave()}>
+            Save order!
+          </div>
+          <div className="ordering-options-container-send" onClick={() => this.onSubmit()}>
+            Send order!
+          </div>
         </div>
       </div>
     )
@@ -119,7 +136,7 @@ class Ordering extends React.Component {
           onDateChange={this.onDateChange}
           onDeleteComment={this.onDeleteComment}
           date={this.state.date}
-          itemName={this.state.itemName}
+          name={this.state.name}
           period={this.state.period}
           comments={this.state.comments}
         />

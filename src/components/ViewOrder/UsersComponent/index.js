@@ -33,7 +33,10 @@ class UsersComponent extends React.Component {
           >
             {this.renderEditMode(index)}
             <OrderComponent
-              data={data}
+              date={data.date}
+              name={data.name}
+              period={data.period}
+              comments={data.comments}
             />
           </div>
         )
@@ -72,7 +75,7 @@ class UsersComponent extends React.Component {
       window.location.reload()
     })
     .catch(err => console.log(err))
-  }
+  } 
 
   renderEditMode(index) {
     if (this.props.isEditable && index === this.state.editIndex) {

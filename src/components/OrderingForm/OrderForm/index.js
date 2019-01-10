@@ -90,8 +90,8 @@ class OrderForm extends React.Component {
             </div>
             <Input
               handleChange={this.props.handleChange}
-              name='itemName'
-              state={this.props.itemName}
+              name='name'
+              state={this.props.name}
             />
           </div>
           <div className="form-comments">
