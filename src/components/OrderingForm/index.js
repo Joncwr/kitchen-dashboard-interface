@@ -20,6 +20,9 @@ class Ordering extends React.Component {
     this.onDateChange=this.onDateChange.bind(this)
     this.handleChange=this.handleChange.bind(this)
     this.onDeleteComment=this.onDeleteComment.bind(this)
+    this.onOverwrite=this.onOverwrite.bind(this)
+    this.viewSavedOrders=this.viewSavedOrders.bind(this)
+    this.setOrder=this.setOrder.bind(this)
   }
 
   onSubmit() {
@@ -43,7 +46,6 @@ class Ordering extends React.Component {
       });
 
       this.props.history.push('/orderingoptions')
-      // console.log(orderDict);
     }
   }
 
@@ -85,17 +87,66 @@ class Ordering extends React.Component {
     this.setState({date: date})
   }
 
-  onSave() {
-  let orderDict = {
-    date: this.state.date,
-    name: this.state.name,
-    period: this.state.period,
-    comments: this.state.comments,
+  onOverwrite(parseSavedOrders) {
+    localStorage.setItem('savedOrders', JSON.stringify(parseSavedOrders))
+    this.props.setModal('hide')
   }
 
-  console.log(orderDict);
-    if (this.state.name !== '' && this.state.period !== '') {
+  onSave() {
+    let orderDict = {
+      name: this.state.name,
+      order : {
+        date: this.state.date,
+        name: this.state.name,
+        period: this.state.period,
+        comments: this.state.comments,
+      }
     }
+
+    if (this.state.name !== '' && this.state.period !== '') {
+      let savedOrders = localStorage.getItem('savedOrders')
+      if (savedOrders) {
+        let parseSavedOrders = Object.assign([],JSON.parse(savedOrders))
+        let sameOrder = false
+        parseSavedOrders.forEach((data,index) => {
+          if (data.name === this.state.name) {
+            sameOrder = true
+            parseSavedOrders[index] = orderDict
+            let modalProps = {
+              name: 'Order already exists. Overwrite?',
+              data: parseSavedOrders,
+              functions: this.onOverwrite,
+            }
+            this.props.setModal('show', 'ConfirmationModal', modalProps)
+            return
+          }
+        })
+        if (!sameOrder) {
+          parseSavedOrders.push(orderDict)
+          localStorage.setItem('savedOrders', JSON.stringify(parseSavedOrders))
+        }
+      }
+
+      else {
+        localStorage.setItem('savedOrders',JSON.stringify([orderDict]))
+      }
+    }
+  }
+
+  setOrder(orderDict) {
+    if (orderDict) {
+      let { order } = orderDict
+      this.setState({
+        date: order.date,
+        name: order.name,
+        period: order.period,
+        comments: order.comments,
+      },() => this.props.setModal('hide'))
+    }
+  }
+
+  viewSavedOrders() {
+    this.props.setModal('show', 'SavedOrdersModal', this.setOrder)
   }
 
   renderViewer() {
@@ -139,6 +190,7 @@ class Ordering extends React.Component {
           name={this.state.name}
           period={this.state.period}
           comments={this.state.comments}
+          viewSavedOrders={this.viewSavedOrders}
         />
       </div>
     )
@@ -158,11 +210,3 @@ class Ordering extends React.Component {
 }
 
 export default Ordering
-
-
-let testData = {
-  name: 'Chicken Sandwich',
-  deadline: '2019-01-05T10:17:16+08:00',
-  period: 'Breakfast',
-  comments: ['Only put 1 tbsp of sweetener on my shit','only put 1 tbsp of oil'],
-}

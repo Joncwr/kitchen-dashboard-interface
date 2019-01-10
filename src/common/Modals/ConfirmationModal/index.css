@@ -1,0 +1,46 @@
+.confirmationModal {
+  flex-direction: column;
+  padding: 50px;
+  background-color: #FFFED7;
+}
+
+.confirmationModal-headerContainer {
+  max-width: 500px;
+  padding: 0 20px;
+}
+
+.confirmationModal-headerContainer-text{
+  text-align: center;
+  font-size: 60px;
+  font-family: 'Staatliches';
+}
+
+.confirmationModal-actionContainer {
+  display: flex;
+  margin-top: 70px;
+}
+
+.confirmationModal-actionContainer-confirm,
+.confirmationModal-actionContainer-decline {
+  width: 300px;
+  height: 80px;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 30px;
+  box-sizing: border-box;
+  color: #fff;
+  font-size: 30px;
+  font-family: 'Staatliches';
+}
+
+.confirmationModal-actionContainer-confirm {
+  background-color: #00ff55;
+  border: 5px solid #00802b;
+}
+
+.confirmationModal-actionContainer-decline {
+  background-color: #ff4d4d;
+  border: 5px solid #800000;
+}

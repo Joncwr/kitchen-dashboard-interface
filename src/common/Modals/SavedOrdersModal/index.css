@@ -1,0 +1,88 @@
+.savedOrdersModal {
+  width: 700px;
+  flex-direction: column;
+  padding: 100px 130px;
+  background-color: #FFFED7;
+}
+
+.savedOrdersModal-header {
+  width: 100%;
+  margin-bottom: 70px;
+}
+
+.savedOrdersModal-header-text{
+  text-align: center;
+  font-size: 60px;
+  font-family: 'Staatliches';
+}
+
+.savedOrdersModal-listContainer {
+  width: 100%;
+  height: 500px;
+  border-radius: 24px;
+  background-color: #fff;
+  box-sizing: border-box;
+  box-shadow: 0 2px 30px 0 rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.savedOrdersModal-listContainer-order {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  box-sizing: border-box;
+  padding-left: 20px;
+  border-bottom: 2px solid #cccccc;
+}
+
+.savedOrdersModal-listContainer-order-textContainer {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding-right: 30px;
+  overflow: hidden;
+}
+
+.savedOrdersModal-listContainer-order-textContainer-text {
+  font-size: 35px;
+  font-family: 'Staatliches';
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.savedOrdersModal-listContainer-order-delete {
+  width: 80px;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #ff4d4d;
+}
+
+.savedOrdersModal-listContainer-order-delete-icon {
+  height: 100%;
+  width: 100%;
+  background-color: white;
+	mask: url('/img/icon_delete.svg') no-repeat center center/ cover;
+}
+
+.savedOrdersModal-listContainer-blank {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.savedOrdersModal-listContainer-blank-icon {
+  height: 250px;
+  width: 250px;
+  background: url('/img/icon_sad_bread.svg') center center / contain;
+}
+
+.savedOrdersModal-listContainer-blank-text {
+  margin-top: 30px;
+  font-size: 40px;
+  font-family: 'Staatliches';
+}

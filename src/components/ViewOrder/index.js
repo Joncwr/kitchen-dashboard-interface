@@ -20,6 +20,10 @@ class ViewOrder extends React.Component {
   }
 
   componentDidMount() {
+    this.getOrders()
+  }
+
+  getOrders() {
     let name = {name: JSON.parse(localStorage.getItem('account')).username}
     axios.post(process.env.REACT_APP_SERVER + '/getOrders', name)
     .then(res => {
@@ -46,6 +50,7 @@ class ViewOrder extends React.Component {
               setOptionsAnimated={this.setOptionsAnimated}
               isOptionsAnimated={this.state.isOptionsAnimated}
               data={this.state.data}
+              getOrders={this.getOrders.bind(this)}
             />
           </div>
         )
@@ -71,19 +76,25 @@ class ViewOrder extends React.Component {
         </div>
       )
     }
+    else {
+      return (
+        <div className="viewOrder" onMouseDown={() => this.setEditableState(false)}>
+          <div className="viewOrder-left">
+
+          </div>
+          <div className="viewOrder-right">
+            {this.renderPreview()}
+          </div>
+        </div>
+      )
+    }
   }
 
   render() {
     return (
-      <div className="viewOrder" onMouseDown={() => this.setEditableState(false)}>
-        {this.renderNoOrders()}
+      <div className='default'>
         <div className="ordering-back" onClick={() => this.props.history.goBack()}/>
-        <div className="viewOrder-left">
-
-        </div>
-        <div className="viewOrder-right">
-          {this.renderPreview()}
-        </div>
+        {this.renderNoOrders()}
       </div>
     )
   }

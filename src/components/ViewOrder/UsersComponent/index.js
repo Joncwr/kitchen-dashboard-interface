@@ -17,6 +17,7 @@ class UsersComponent extends React.Component {
     this.onMouseDown=this.onMouseDown.bind(this)
     this.onMouseUp=this.onMouseUp.bind(this)
     this.editMode=this.editMode.bind(this)
+    this.deleteOrder=this.deleteOrder.bind(this)
   }
 
   renderOrders() {
@@ -72,10 +73,13 @@ class UsersComponent extends React.Component {
     axios.post(process.env.REACT_APP_SERVER + '/deleteOrder', deleteOrderDict)
     .then(res => {
       console.log(res);
-      window.location.reload()
+      this.setState({editIndex: ''},() => {
+        this.props.setEditableState('false')
+        this.props.getOrders()
+      })
     })
     .catch(err => console.log(err))
-  } 
+  }
 
   renderEditMode(index) {
     if (this.props.isEditable && index === this.state.editIndex) {
