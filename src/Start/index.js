@@ -23,14 +23,14 @@ class Start extends React.Component {
             </div>
           </div>
         </div>
-        <div className="start-recipeViewer" onClick={() => this.onClick('recipeviewer')}>
+        {/*<div className="start-recipeViewer" onClick={() => this.onClick('recipeviewer')}>
           <div className="start-recipeViewer-alignMiddle">
             <div className="start-recipeViewer-alignMiddle-icon" />
             <div className="start-recipeViewer-alignMiddle-text">
               Recipe Viewer
             </div>
           </div>
-        </div>
+        </div>*/}
       </div>
     )
   }
