@@ -30,17 +30,17 @@
   align-items: center;
   margin: 0 30px;
   box-sizing: border-box;
-  color: #fff;
+  color: #000;
   font-size: 30px;
   font-family: 'Staatliches';
 }
 
 .confirmationModal-actionContainer-confirm {
-  background-color: #00ff55;
-  border: 5px solid #00802b;
+  background-color: #99ff99;
+  border: 5px solid #303030;
 }
 
 .confirmationModal-actionContainer-decline {
-  background-color: #ff4d4d;
-  border: 5px solid #800000;
+  background-color: #ff8080;
+  border: 5px solid #303030;
 }

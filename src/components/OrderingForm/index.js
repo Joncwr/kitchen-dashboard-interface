@@ -1,6 +1,6 @@
 import React from 'react'
-import axios from 'axios'
 
+import OrdersHelper from '../../services/Orders/OrdersHelper.js'
 import OrderComponent from './OrderComponent'
 import OrderForm from './OrderForm'
 
@@ -36,17 +36,14 @@ class Ordering extends React.Component {
           comments: this.state.comments,
         }
       }
-
-      axios.post(process.env.REACT_APP_SERVER + '/sendOrder', orderDict)
+      OrdersHelper.sendOrder(orderDict)
       .then(res => {
-        console.log(res.data);
+        console.log(res);
       })
-      .catch(function (error) {
-        console.log(error);
-      });
-
-      this.props.history.push('/orderingoptions')
+      .catch(err => console.log(err))
     }
+
+    this.props.history.push('/orderingoptions')
   }
 
   handleChange(event, index) {
@@ -104,32 +101,13 @@ class Ordering extends React.Component {
     }
 
     if (this.state.name !== '' && this.state.period !== '') {
-      let savedOrders = localStorage.getItem('savedOrders')
-      if (savedOrders) {
-        let parseSavedOrders = Object.assign([],JSON.parse(savedOrders))
-        let sameOrder = false
-        parseSavedOrders.forEach((data,index) => {
-          if (data.name === this.state.name) {
-            sameOrder = true
-            parseSavedOrders[index] = orderDict
-            let modalProps = {
-              name: 'Order already exists. Overwrite?',
-              data: parseSavedOrders,
-              functions: this.onOverwrite,
-            }
-            this.props.setModal('show', 'ConfirmationModal', modalProps)
-            return
-          }
-        })
-        if (!sameOrder) {
-          parseSavedOrders.push(orderDict)
-          localStorage.setItem('savedOrders', JSON.stringify(parseSavedOrders))
-        }
+      let saveOrderDict = {
+        orderDict: orderDict,
+        name: this.state.name,
+        modalProps: this.onOverwrite,
+        callModal: this.props.setModal,
       }
-
-      else {
-        localStorage.setItem('savedOrders',JSON.stringify([orderDict]))
-      }
+      OrdersHelper.saveOrder(saveOrderDict)
     }
   }
 
@@ -152,6 +130,11 @@ class Ordering extends React.Component {
   renderViewer() {
     return (
       <div className="ordering-previewWrapper">
+        <div className="ordering-previewWrapper-savedOrders">
+          <div className="ordering-previewWrapper-savedOrders-button" onClick={this.viewSavedOrders}>
+            Saved Orders
+          </div>
+        </div>
         <div className="ordering-previewContainer">
           <div className="ordering-previewContainer-header">Preview Box</div>
           <div className="ordering-previewContainer-wrapper">
@@ -196,22 +179,11 @@ class Ordering extends React.Component {
     )
   }
 
-  renderSavedOrders() {
-    return (
-      <div className="ordering-savedOrders">
-        <div className="ordering-savedOrders-button" onClick={this.viewSavedOrders}>
-          Saved Orders
-        </div>
-      </div>
-    )
-  }
-
   render() {
     return (
       <div className="default">
         <div className="ordering-back" onClick={() => this.props.history.goBack()}/>
         <div className="ordering">
-          {this.renderSavedOrders()}
           {this.renderOrderForm()}
           {this.renderViewer()}
         </div>

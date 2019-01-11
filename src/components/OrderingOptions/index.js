@@ -1,5 +1,6 @@
 import React from 'react'
-import axios from 'axios'
+
+import OrdersHelper from '../../services/Orders/OrdersHelper.js'
 
 import './index.css'
 
@@ -17,16 +18,11 @@ class OrderingOptions extends React.Component {
       this.props.history.push('viewOrder')
     }
     else if (action === 'deleteLastOrder') {
-      let userDict = {
-        name: JSON.parse(localStorage.getItem('account')).username
-      }
-      axios.post(process.env.REACT_APP_SERVER + '/deleteLastOrder', userDict)
+      OrdersHelper.deleteLastOrder()
       .then(res => {
-        console.log(res.data);
+        console.log(res);
       })
-      .catch(function (error) {
-        console.log(error);
-      });
+      .catch(err => console.log(err))
     }
   }
 

@@ -1,6 +1,6 @@
 import React from 'react'
-import axios from 'axios'
 
+import OrdersHelper from '../../services/Orders/OrdersHelper.js'
 import UsersComponent from './UsersComponent'
 
 import './index.css'
@@ -17,6 +17,7 @@ class ViewOrder extends React.Component {
     }
     this.setEditableState=this.setEditableState.bind(this)
     this.setOptionsAnimated=this.setOptionsAnimated.bind(this)
+    this.getOrders=this.getOrders.bind(this)
   }
 
   componentDidMount() {
@@ -24,8 +25,7 @@ class ViewOrder extends React.Component {
   }
 
   getOrders() {
-    let name = {name: JSON.parse(localStorage.getItem('account')).username}
-    axios.post(process.env.REACT_APP_SERVER + '/getOrders', name)
+    OrdersHelper.getOrders()
     .then(res => {
       if (res.data) {
         if (res.data.orders.length > 0) {
@@ -36,7 +36,7 @@ class ViewOrder extends React.Component {
         }
       }
     })
-    .catch(err => console.log(err))
+    .catch(err => console.log())
   }
 
   renderPreview() {

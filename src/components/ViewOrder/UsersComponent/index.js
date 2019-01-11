@@ -1,6 +1,6 @@
 import React from 'react'
-import axios from 'axios'
 
+import OrdersHelper from '../../../services/Orders/OrdersHelper.js'
 import OrderComponent from '../../OrderingForm/OrderComponent'
 
 import './index.css'
@@ -65,14 +65,8 @@ class UsersComponent extends React.Component {
   deleteOrder() {
     this.props.setOptionsAnimated(true)
 
-    let deleteOrderDict = {
-      name: JSON.parse(localStorage.getItem('account')).username,
-      order: this.state.editIndex,
-    }
-
-    axios.post(process.env.REACT_APP_SERVER + '/deleteOrder', deleteOrderDict)
+    OrdersHelper.deleteOrder(this.state.editIndex)
     .then(res => {
-      console.log(res);
       this.setState({editIndex: ''},() => {
         this.props.setEditableState('false')
         this.props.getOrders()

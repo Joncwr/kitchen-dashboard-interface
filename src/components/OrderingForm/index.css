@@ -26,6 +26,29 @@
   align-items: center;
 }
 
+.ordering-previewWrapper-savedOrders {
+  width: 300px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 75px;
+}
+
+.ordering-previewWrapper-savedOrders-button {
+  width: 100%;
+  height: 100%;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 35px;
+  font-family: 'Staatliches';
+  background-color: #ffffb3;
+  border: 5px solid #303030;
+  box-shadow: 0 2px 30px 0 rgba(0, 0, 0, 0.3);
+}
+
+
 .ordering-previewContainer {
   width: 550px;
   height: 400px;
@@ -57,7 +80,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  margin-top: 150px;
+  margin-top: 75px;
   padding: 0 100px;
   box-sizing: border-box;
 }
@@ -70,44 +93,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #fff;
+  color: #000;
   font-size: 35px;
   font-family: 'Staatliches';
+  border: 5px solid #303030;
 }
 
 .ordering-options-container-save {
-  border: 5px solid #008055;
-  background-color: #00e699;
+  background-color: #99ffff;
 }
 
 .ordering-options-container-send {
-  border: 5px solid #802b00;
-  background-color: #ff9933;
+  background-color: #ff944d;
 }
 
 .orderForm {
   flex: 1;
-}
-
-.ordering-savedOrders {
-  position: absolute;
-  top: 50px;
-  width: 300px;
-  height: 70px;
-  display: flex;
-  justify-content: center;
-}
-
-.ordering-savedOrders-button {
-  width: 100%;
-  height: 100%;
-  border-radius: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 35px;
-  font-family: 'Staatliches';
-  background-color: #ffffb3;
-  border: 5px solid #303030;
-  box-shadow: 0 2px 30px 0 rgba(0, 0, 0, 0.3);
 }
