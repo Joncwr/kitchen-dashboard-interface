@@ -1,0 +1,57 @@
+.snackbar {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 2500;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.snackbar-container {
+  height: 120px;
+  padding: 0 50px;
+  border-radius: 0 0 24px 24px;
+  background-color: #FFFED7;
+  box-shadow: 0 2px 40px 0 rgba(0, 0, 0, 0.35);
+  border-bottom: 8px solid #303030;
+  border-left: 8px solid #303030;
+  border-right: 8px solid #303030;
+  box-sizing: border-box;
+  overflow: hidden;
+  animation: snackbar linear forwards;
+}
+
+.snackbar-container-propsContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.snackbar-container-propsContainer-text {
+  font-size: 40px;
+  font-family: 'Staatliches';
+}
+
+@keyframes snackbar {
+  0% {
+    transform: translateY(-150px);
+  }
+  9% {
+    transform: translateY(0px);
+  }
+  12% {
+    transform: translateY(-10px);
+  }
+  88% {
+    transform: translateY(-10px);
+  }
+  91% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-150px);
+  }
+}

@@ -25,16 +25,19 @@ class SavedOrdersModal extends React.Component {
   }
 
   onSelectOrder(index) {
-    this.props.modalProps(this.state.savedOrders[index])
+    this.props.modalProps.setOrder(this.state.savedOrders[index])
   }
 
   onDelete(index) {
     let savedOrders = Object.assign([], this.state.savedOrders)
     savedOrders.splice(index, 1)
-
     localStorage.setItem('savedOrders', JSON.stringify(savedOrders))
     this.getOrders()
 
+    let snackbarText = {
+      text: 'Saved order has been successfully deleted.'
+    }
+    this.props.modalProps.setSnackbar('show', snackbarText)
   }
 
   renderSavedOrders() {

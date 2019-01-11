@@ -1,4 +1,5 @@
 import React from 'react'
+import { Scrollbars } from 'react-custom-scrollbars'
 
 import OrdersHelper from '../../services/Orders/OrdersHelper.js'
 import UsersComponent from './UsersComponent'
@@ -13,7 +14,7 @@ class ViewOrder extends React.Component {
       isEditable: false,
       isOptionsAnimated: false,
       data: '',
-      hasNoOrders: false,
+      hasNoOrders: true,
     }
     this.setEditableState=this.setEditableState.bind(this)
     this.setOptionsAnimated=this.setOptionsAnimated.bind(this)
@@ -29,7 +30,7 @@ class ViewOrder extends React.Component {
     .then(res => {
       if (res.data) {
         if (res.data.orders.length > 0) {
-          this.setState({data: res.data})
+          this.setState({data: res.data, hasNoOrders: false})
         }
         else {
           this.setState({hasNoOrders: true})
@@ -44,14 +45,17 @@ class ViewOrder extends React.Component {
       if (this.state.data.orders.length > 0) {
         return (
           <div className="viewOrder-right-container">
-            <UsersComponent
-              setEditableState={this.setEditableState}
-              isEditable={this.state.isEditable}
-              setOptionsAnimated={this.setOptionsAnimated}
-              isOptionsAnimated={this.state.isOptionsAnimated}
-              data={this.state.data}
-              getOrders={this.getOrders}
-            />
+            <Scrollbars autoHide>
+              <UsersComponent
+                setEditableState={this.setEditableState}
+                isEditable={this.state.isEditable}
+                setOptionsAnimated={this.setOptionsAnimated}
+                isOptionsAnimated={this.state.isOptionsAnimated}
+                data={this.state.data}
+                getOrders={this.getOrders}
+                setSnackbar={this.props.setSnackbar}
+              />
+            </Scrollbars>
           </div>
         )
       }
@@ -76,7 +80,7 @@ class ViewOrder extends React.Component {
         </div>
       )
     }
-    else {
+    else if (!this.state.hasNoOrders) {
       return (
         <div className="viewOrder" onMouseDown={() => this.setEditableState(false)}>
           <div className="viewOrder-left">

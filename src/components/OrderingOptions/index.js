@@ -21,6 +21,10 @@ class OrderingOptions extends React.Component {
       OrdersHelper.deleteLastOrder()
       .then(res => {
         console.log(res);
+        let snackbarText = {
+          text: 'Last order has been successfully deleted.'
+        }
+        this.props.setSnackbar('show', snackbarText)
       })
       .catch(err => console.log(err))
     }

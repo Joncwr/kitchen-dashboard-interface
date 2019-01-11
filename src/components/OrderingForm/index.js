@@ -39,6 +39,10 @@ class Ordering extends React.Component {
       OrdersHelper.sendOrder(orderDict)
       .then(res => {
         console.log(res);
+        let snackbarText = {
+          text: 'Order has been successfully sent.'
+        }
+        this.props.setSnackbar('show', snackbarText)
       })
       .catch(err => console.log(err))
     }
@@ -105,7 +109,8 @@ class Ordering extends React.Component {
         orderDict: orderDict,
         name: this.state.name,
         modalProps: this.onOverwrite,
-        callModal: this.props.setModal,
+        setModal: this.props.setModal,
+        setSnackbar: this.props.setSnackbar,
       }
       OrdersHelper.saveOrder(saveOrderDict)
     }
@@ -124,7 +129,11 @@ class Ordering extends React.Component {
   }
 
   viewSavedOrders() {
-    this.props.setModal('show', 'SavedOrdersModal', this.setOrder)
+    let savedOrderModalDict = {
+      setOrder: this.setOrder,
+      setSnackbar: this.props.setSnackbar,
+    }
+    this.props.setModal('show', 'SavedOrdersModal', savedOrderModalDict)
   }
 
   renderViewer() {

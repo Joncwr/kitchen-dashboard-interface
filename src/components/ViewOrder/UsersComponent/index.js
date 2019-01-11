@@ -70,6 +70,10 @@ class UsersComponent extends React.Component {
       this.setState({editIndex: ''},() => {
         this.props.setEditableState('false')
         this.props.getOrders()
+        let snackbarText = {
+          text: 'Selected order has been successfully deleted.'
+        }
+        this.props.setSnackbar('show', snackbarText)
       })
     })
     .catch(err => console.log(err))

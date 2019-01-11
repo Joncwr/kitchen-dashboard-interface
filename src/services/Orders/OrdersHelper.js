@@ -54,6 +54,9 @@ let deleteLastOrder = () => {
 
 let saveOrder = (saveOrderDict) => {
   let savedOrders = localStorage.getItem('savedOrders')
+  let snackbarText = {
+    text: 'New Order has been saved!'
+  }
   if (savedOrders) {
     let parseSavedOrders = Object.assign([],JSON.parse(savedOrders))
     let sameOrder = false
@@ -65,19 +68,22 @@ let saveOrder = (saveOrderDict) => {
           name: 'Order already exists. Overwrite?',
           data: parseSavedOrders,
           functions: saveOrderDict.modalProps,
+          setSnackbar: saveOrderDict.setSnackbar
         }
-        saveOrderDict.callModal('show', 'ConfirmationModal', modalProps)
+        saveOrderDict.setModal('show', 'ConfirmationModal', modalProps)
         return
       }
     })
     if (!sameOrder) {
       parseSavedOrders.push(saveOrderDict.orderDict)
       localStorage.setItem('savedOrders', JSON.stringify(parseSavedOrders))
+      saveOrderDict.setSnackbar('show',snackbarText)
     }
   }
 
   else {
     localStorage.setItem('savedOrders',JSON.stringify([saveOrderDict.orderDict]))
+    saveOrderDict.setSnackbar('show',snackbarText)
   }
 }
 
