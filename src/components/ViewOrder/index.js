@@ -50,7 +50,7 @@ class ViewOrder extends React.Component {
               setOptionsAnimated={this.setOptionsAnimated}
               isOptionsAnimated={this.state.isOptionsAnimated}
               data={this.state.data}
-              getOrders={this.getOrders.bind(this)}
+              getOrders={this.getOrders}
             />
           </div>
         )
@@ -80,7 +80,14 @@ class ViewOrder extends React.Component {
       return (
         <div className="viewOrder" onMouseDown={() => this.setEditableState(false)}>
           <div className="viewOrder-left">
-
+            <div className="viewOrder-left-container">
+              <div className="viewOrder-left-container-image" />
+              <div className="viewOrder-left-container-textContainer">
+                <div className="viewOrder-left-container-textContainer-text">
+                  Click and hold the order to activate deletion mode. Please wait a few seconds after deleting for the orders to update.
+                </div>
+              </div>
+            </div>
           </div>
           <div className="viewOrder-right">
             {this.renderPreview()}

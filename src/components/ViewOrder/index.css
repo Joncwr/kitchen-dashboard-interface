@@ -1,21 +1,3 @@
-.viewOrder {
-  width: 100%;
-  height: 100%;
-  display: flex;
-}
-
-.viewOrder-left,
-.viewOrder-right {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  margin-top: 70px;
-}
-
-.viewOrder-right-container {
-  flex: .5;
-}
-
 .blank {
   width: 100%;
   height: 100%;
@@ -34,5 +16,50 @@
 .blank-text {
   margin-top: 20px;
   font-size: 50px;
+  font-family: 'Staatliches';
+}
+
+.viewOrder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.viewOrder-left,
+.viewOrder-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  margin-top: 70px;
+}
+
+.viewOrder-right-container {
+  flex: .5;
+}
+
+.viewOrder-left-container {
+  width: 50%;
+  height: 100%;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10%;
+}
+
+.viewOrder-left-container-image {
+  height: 350px;
+  width: 350px;
+  background: url('/img/icon_burger.svg') center center / contain;
+}
+
+.viewOrder-left-container-textContainer {
+  width: 60%;
+  margin-top: 50px;
+}
+
+.viewOrder-left-container-textContainer-text {
+  text-align: center;
+  font-size: 32px;
   font-family: 'Staatliches';
 }
