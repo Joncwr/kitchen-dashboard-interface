@@ -37,7 +37,7 @@ class ViewOrder extends React.Component {
         }
       }
     })
-    .catch(err => console.log())
+    .catch(err => console.log(err))
   }
 
   renderPreview() {
