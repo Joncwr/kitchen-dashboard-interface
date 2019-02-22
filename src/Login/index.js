@@ -17,9 +17,9 @@ class Login extends React.Component {
   }
 
   componentDidMount() {
-    if (localStorage.getItem('account')) {
-      this.props.history.push('start')
-    }
+    // if (localStorage.getItem('account')) {
+    //   this.props.history.push('start')
+    // }
   }
 
   onPress() {

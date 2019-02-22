@@ -1,23 +1,19 @@
-let login = [
-  {
-    name: 'Jon',
-    password: 'sibeizai'
-  },
-  {
-    name: 'Crystal',
-    password: 'imcute'
-  },
-]
+const axios = require('axios')
 
 module.exports = {
   authorizeUser: (username,password) => {
     return new Promise((resolve, reject) => {
-      login.forEach((data,index) => {
-        if (data.name === username && data.password === password) {
-          resolve('login!')
-        }
+      let userDetails = {
+        username,
+        password
+      }
+
+      axios.post('http://18.191.120.71:80/api/admin/login', userDetails)
+      .then(res => {
+        if (res.status === 200) resolve()
+        else reject(res)
       })
-      reject('login failed')
+      .catch(err => reject(err))
     })
   }
 }
