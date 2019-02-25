@@ -7,27 +7,28 @@ import './index.css'
 class OrderComponent extends React.Component {
   renderComments() {
     let { comments } = this.props
-    if (comments) {
-      if (comments.length > 0) {
-        let renderCommentsArr = []
-        comments.forEach((data,index) => {
-            if (index < 3) {
-              renderCommentsArr.push(
-                <div className="orderComponent-comments-container" key={index}>
-                  <div className="orderComponent-comments-container-text">
-                    {data}
-                  </div>
+    if (Object.keys(comments).length !== 0) {
+      let renderCommentsArr = []
+      for (var key in comments) {
+        if (comments.hasOwnProperty(key)) {
+          if (key < 3) {
+            renderCommentsArr.push(
+              <div className="orderComponent-comments-container" key={key}>
+                <div className="orderComponent-comments-container-text">
+                  {comments[key]}
                 </div>
-              )
-            }
-        })
-        return (
-          <div className="orderComponent-comments">
-            <div className="orderComponent-comments-divider" />
-            {renderCommentsArr}
-          </div>
-        )
+              </div>
+            )
+          }
+        }
       }
+      
+      return (
+        <div className="orderComponent-comments">
+          <div className="orderComponent-comments-divider" />
+          {renderCommentsArr}
+        </div>
+      )
     }
   }
 

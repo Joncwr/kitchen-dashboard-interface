@@ -4,49 +4,22 @@ import { Scrollbars } from 'react-custom-scrollbars'
 import './index.css'
 
 class SavedOrdersModal extends React.Component {
-  constructor(){
-    super()
-
-    this.state = {
-      savedOrders: [],
-    }
-    this.getOrders=this.getOrders.bind(this)
-  }
-
-  componentDidMount() {
-    this.getOrders()
-  }
-
-  getOrders() {
-    if (localStorage.getItem('savedOrders')) {
-      let parseSavedOrders = Object.assign([], JSON.parse(localStorage.getItem('savedOrders')))
-      this.setState({savedOrders: parseSavedOrders})
-    }
-  }
-
-  onSelectOrder(index) {
-    this.props.modalProps.setOrder(this.state.savedOrders[index])
+  onSelectOrder(order) {
+    this.props.modalProps.setOrder(order)
   }
 
   onDelete(index) {
-    let savedOrders = Object.assign([], this.state.savedOrders)
-    savedOrders.splice(index, 1)
-    localStorage.setItem('savedOrders', JSON.stringify(savedOrders))
-    this.getOrders()
 
-    let snackbarText = {
-      text: 'Saved order has been successfully deleted.'
-    }
-    this.props.modalProps.setSnackbar('show', snackbarText)
   }
 
   renderSavedOrders() {
-    if (this.state.savedOrders.length > 0) {
+    let savedOrders = this.props.modalProps.savedOrders
+    if (savedOrders.length > 0) {
       let renderSavedOrdersArr = []
-      this.state.savedOrders.forEach((data,index) => {
+      savedOrders.forEach((data,index) => {
         renderSavedOrdersArr.push(
           <div className="savedOrdersModal-listContainer-order" key={index}>
-            <div className="savedOrdersModal-listContainer-order-textContainer"onClick={() => this.onSelectOrder(index)}>
+            <div className="savedOrdersModal-listContainer-order-textContainer"onClick={() => this.onSelectOrder(savedOrders[index])}>
               <div className="savedOrdersModal-listContainer-order-textContainer-text">
                 {data.name}
               </div>

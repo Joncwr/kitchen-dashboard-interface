@@ -5,13 +5,7 @@ import './index.css'
 class ModalComponent extends React.Component {
   onConfirm() {
     if (this.props.modalProps) {
-      if (this.props.modalProps.functions) {
-        let snackbarText = {
-          text: 'Order has been successfully overwritten.'
-        }
-        this.props.modalProps.functions(this.props.modalProps.data)
-        this.props.modalProps.setSnackbar('show', snackbarText)
-      }
+      if (this.props.modalProps.functions) this.props.modalProps.functions(this.props.modalProps.data, this.props.modalProps.orderId)
     }
   }
 

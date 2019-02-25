@@ -15,21 +15,12 @@ class OrderForm extends React.Component {
     this.onPress=this.onPress.bind(this)
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps !== this.props) {
-      if (prevProps.comments !== this.props.comments) {
-        this.setState({comments: this.props.comments.length})
-      }
-    }
-  }
-
   renderComments() {
     let renderCommentsArr = []
     let renderDeleteButton
     if (this.state.comments > 0 ? true : false) {
       renderDeleteButton = <div className="form-comments-buttons-container" onClick={() => this.onPress('deleteComment')}>-</div>
     }
-
     for (let i = 0; i < this.state.comments; i++) {
       renderCommentsArr.push(
         <Input
@@ -60,7 +51,7 @@ class OrderForm extends React.Component {
       this.setState({comments: this.state.comments + 1})
     }
     else if (action === 'deleteComment') {
-      this.props.onDeleteComment(this.state.comments)
+      this.props.onDeleteComment(this.state.comments - 1)
       this.setState({comments: this.state.comments - 1})
     }
   }

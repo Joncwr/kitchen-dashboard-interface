@@ -1,6 +1,8 @@
 import React from 'react'
 
 import OrdersHelper from '../../services/Orders/OrdersHelper.js'
+import { createOrder } from '../../services/api/orders'
+import { saveOrder, editSavedOrder, getSavedOrders } from '../../services/api/saveOrders'
 import OrderComponent from './OrderComponent'
 import OrderForm from './OrderForm'
 
@@ -12,9 +14,9 @@ class Ordering extends React.Component {
 
     this.state = {
       date: new Date(),
-      name: '',
-      period: '',
-      comments: [],
+      name: 'lol',
+      period: 'lolol',
+      comments: {},
     }
     this.onSubmit=this.onSubmit.bind(this)
     this.onDateChange=this.onDateChange.bind(this)
@@ -28,26 +30,30 @@ class Ordering extends React.Component {
   onSubmit() {
     if (this.state.name !== '' && this.state.period !== '') {
       let orderDict = {
-        name: JSON.parse(localStorage.getItem('account')).username,
-        order: {
-          name: this.state.name,
-          date: this.state.date,
-          period: this.state.period,
-          comments: this.state.comments,
-        }
+        name: this.state.name,
+        date: this.state.date,
+        period: this.state.period,
+        comments: this.state.comments,
       }
-      OrdersHelper.sendOrder(orderDict)
-      .then(res => {
-        console.log(res);
-        let snackbarText = {
-          text: 'Order has been successfully sent.'
-        }
-        this.props.setSnackbar('show', snackbarText)
-      })
-      .catch(err => console.log(err))
+      createOrder(orderDict)
+        .then(res => {
+          if (res === 'OK') {
+            this.props.setSnackbar('show', {
+              text: 'Order has been successfully sent.'
+            })
+            this.props.history.push('/orderingoptions')
+          }
+          else this.props.setSnackbar('show', {
+            text: 'An error has occurred'
+          })
+        })
+        .catch(err => this.props.setSnackbar('show', {
+          text: 'An error has occurred'
+        }))
     }
-
-    this.props.history.push('/orderingoptions')
+    else this.props.setSnackbar('show', {
+      text: 'Please make sure all fields are entered.'
+    })
   }
 
   handleChange(event, index) {
@@ -69,56 +75,67 @@ class Ordering extends React.Component {
 
     else if (name === 'comments') {
       if (strLength < 40) {
-        let commentsArr = Object.assign([], this.state.comments)
-        commentsArr[index] = value
-        this.setState({comments: commentsArr})
+        let commentsDict = Object.assign({}, this.state.comments)
+        commentsDict[index] = value
+        this.setState({comments: commentsDict})
       }
     }
   }
 
-  onDeleteComment(commentsNumber) {
-    let commentsArr = Object.assign([], this.state.comments)
-    if (commentsArr[commentsNumber-1]) {
-      commentsArr.pop()
-      this.setState({comments: commentsArr})
-    }
+  onDeleteComment(dictKey) {
+    let commentsDict = Object.assign({}, this.state.comments)
+    delete commentsDict[dictKey]
+    this.setState({comments: commentsDict})
   }
 
   onDateChange(date) {
     this.setState({date: date})
   }
 
-  onOverwrite(parseSavedOrders) {
-    localStorage.setItem('savedOrders', JSON.stringify(parseSavedOrders))
+  onOverwrite(orderDict, orderId) {
+    editSavedOrder(orderDict, orderId)
+      .then(res => {
+        if (res === 'OK') this.props.setSnackbar('show', {
+          text: 'Order has been overwritten.'
+        })
+      })
+      .catch(err => this.props.setSnackbar('show', {
+        text: 'An error occurred.'
+      }))
     this.props.setModal('hide')
   }
 
   onSave() {
-    let orderDict = {
-      name: this.state.name,
-      order : {
+    if (this.state.name !== '' && this.state.period !== '') {
+      let orderDict = {
         date: this.state.date,
         name: this.state.name,
         period: this.state.period,
         comments: this.state.comments,
       }
+      saveOrder(orderDict)
+        .then(res => {
+          if (res === 'OK') this.props.setSnackbar('show', {
+            text: 'New Order has been saved!'
+          })
+          else if (res.error === 'same name error') {
+            let modalProps = {
+              name: 'Order already exists. Overwrite?',
+              data: orderDict,
+              orderId: res.order.id,
+              functions: this.onOverwrite.bind(this)
+            }
+            this.props.setModal('show', 'ConfirmationModal', modalProps)
+          }
+        })
     }
-
-    if (this.state.name !== '' && this.state.period !== '') {
-      let saveOrderDict = {
-        orderDict: orderDict,
-        name: this.state.name,
-        modalProps: this.onOverwrite,
-        setModal: this.props.setModal,
-        setSnackbar: this.props.setSnackbar,
-      }
-      OrdersHelper.saveOrder(saveOrderDict)
-    }
+    else this.props.setSnackbar('show', {
+      text: 'Please make sure all fields are entered.'
+    })
   }
 
-  setOrder(orderDict) {
-    if (orderDict) {
-      let { order } = orderDict
+  setOrder(order) {
+    if (order) {
       this.setState({
         date: order.date,
         name: order.name,
@@ -129,11 +146,15 @@ class Ordering extends React.Component {
   }
 
   viewSavedOrders() {
-    let savedOrderModalDict = {
-      setOrder: this.setOrder,
-      setSnackbar: this.props.setSnackbar,
-    }
-    this.props.setModal('show', 'SavedOrdersModal', savedOrderModalDict)
+    getSavedOrders()
+      .then(orders => {
+        console.log(orders);
+        let savedOrderModalDict = {
+          setOrder: this.setOrder,
+          savedOrders: orders
+        }
+        this.props.setModal('show', 'SavedOrdersModal', savedOrderModalDict)
+      })
   }
 
   renderViewer() {
