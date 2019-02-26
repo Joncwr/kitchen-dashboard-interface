@@ -59,10 +59,7 @@ class UsersComponent extends React.Component {
 
   editMode(index) {
     this.props.setEditableState(true)
-    this.setState({editIndex: index},() => {
-
-      console.log(this.props.data.orders[this.state.editIndex]);
-    })
+    this.setState({editIndex: index})
   }
 
   deleteOrder() {
@@ -120,11 +117,7 @@ class UsersComponent extends React.Component {
       )
     }
   }
-
-  componentDidMount() {
-    console.log(this.props.data);
-  }
-
+  
   render() {
     let { username } = this.props.data
     return (

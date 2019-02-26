@@ -18,6 +18,7 @@ class ModalComponent extends React.Component {
          return <SavedOrdersModal
                   modalProps={this.props.modalProps}
                   setModal={this.props.setModal}
+                  setSnackbar={this.props.setSnackbar}
                 />
 
       default:

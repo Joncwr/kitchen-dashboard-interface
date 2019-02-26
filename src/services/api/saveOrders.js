@@ -15,5 +15,9 @@ module.exports = {
     let { userId } = JSON.parse(localStorage.getItem('user'))
 
     return jwtFetch('GET', 'api/orders/getSavedOrders/' + userId)
-  }
+  },
+
+  deleteSavedOrder: (orderId) => {
+    return jwtFetch('DELETE', 'api/orders/deleteSavedOrder/' + orderId)
+  },
 }

@@ -46,27 +46,34 @@ class Login extends React.Component {
   render() {
     return (
       <div className="login">
-        <div className="login-inputContainer">
-          <input
-            className="login-inputContainer-input"
-            placeholder='Username'
-            maxLength={10}
-            name='username'
-            value={this.state.username}
-            onChange={this.handleChange}
-            autoComplete='off'
-          />
-          <input
-            className="login-inputContainer-input"
-            placeholder='Password'
-            maxLength={10}
-            type='password'
-            name='password'
-            value={this.state.password}
-            onChange={this.handleChange}
-          />
+        <div className="login-mainWrapper">
+          <div className="login-mainWrapper-inputContainer">
+            <input
+              className='default-input'
+              placeholder='Username'
+              maxLength={10}
+              name='username'
+              value={this.state.username}
+              onChange={this.handleChange}
+              autoComplete='off'
+            />
+            <input
+              className='default-input'
+              placeholder='Password'
+              maxLength={10}
+              type='password'
+              name='password'
+              value={this.state.password}
+              onChange={this.handleChange}
+            />
+          </div>
+          <div className="login-mainWrapper-button" onClick={this.onPress}/>
         </div>
-        <div className="login-button" onClick={this.onPress}/>
+        <div className="login-createAccount">
+          <div className="login-createAccount-button" onClick={() => this.props.history.push('/createAccount')}>
+            Create account here!
+          </div>
+        </div>
       </div>
     )
   }

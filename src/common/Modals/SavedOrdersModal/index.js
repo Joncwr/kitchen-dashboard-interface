@@ -1,6 +1,8 @@
 import React from 'react'
 import { Scrollbars } from 'react-custom-scrollbars'
 
+import { deleteSavedOrder } from '../../../services/api/saveOrders'
+
 import './index.css'
 
 class SavedOrdersModal extends React.Component {
@@ -9,7 +11,14 @@ class SavedOrdersModal extends React.Component {
   }
 
   onDelete(index) {
-
+    let order = this.props.modalProps.savedOrders[index]
+    deleteSavedOrder(order.id)
+      .then(res => {
+        this.props.modalProps.viewSavedOrders()
+      })
+      .catch(() => this.props.setSnackbar('show', {
+        text: 'An error has occurred.'
+      }))
   }
 
   renderSavedOrders() {

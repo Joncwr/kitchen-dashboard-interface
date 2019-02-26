@@ -14,8 +14,8 @@ class Ordering extends React.Component {
 
     this.state = {
       date: new Date(),
-      name: 'lol',
-      period: 'lolol',
+      name: '',
+      period: '',
       comments: {},
     }
     this.onSubmit=this.onSubmit.bind(this)
@@ -52,7 +52,7 @@ class Ordering extends React.Component {
         }))
     }
     else this.props.setSnackbar('show', {
-      text: 'Please make sure all fields are entered.'
+      text: 'Please make sure all **fieldsare entered.'
     })
   }
 
@@ -93,7 +93,12 @@ class Ordering extends React.Component {
   }
 
   onOverwrite(orderDict, orderId) {
-    editSavedOrder(orderDict, orderId)
+    let order = {
+      name: orderDict.name,
+      period: orderDict.period,
+      comments: orderDict.comments
+    }
+    editSavedOrder(order, orderId)
       .then(res => {
         if (res === 'OK') this.props.setSnackbar('show', {
           text: 'Order has been overwritten.'
@@ -130,14 +135,13 @@ class Ordering extends React.Component {
         })
     }
     else this.props.setSnackbar('show', {
-      text: 'Please make sure all fields are entered.'
+      text: 'Please make sure all *fields are entered.'
     })
   }
 
   setOrder(order) {
     if (order) {
       this.setState({
-        date: order.date,
         name: order.name,
         period: order.period,
         comments: order.comments,
@@ -148,10 +152,10 @@ class Ordering extends React.Component {
   viewSavedOrders() {
     getSavedOrders()
       .then(orders => {
-        console.log(orders);
         let savedOrderModalDict = {
           setOrder: this.setOrder,
-          savedOrders: orders
+          savedOrders: orders,
+          viewSavedOrders: this.viewSavedOrders.bind(this)
         }
         this.props.setModal('show', 'SavedOrdersModal', savedOrderModalDict)
       })

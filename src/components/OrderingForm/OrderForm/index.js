@@ -74,7 +74,7 @@ class OrderForm extends React.Component {
           </div>
           <div className="form-period">
             <div className="form-header">
-              Meal/Time Period:
+              *Meal/Time Period:
             </div>
             <Input
               style={{height: '40px', textAlign: 'center'}}
@@ -85,7 +85,7 @@ class OrderForm extends React.Component {
           </div>
           <div className="form-itemName">
             <div className="form-header">
-              Order Name:
+              *Order Name:
             </div>
             <Input
               handleChange={this.props.handleChange}

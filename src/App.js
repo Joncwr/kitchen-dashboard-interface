@@ -5,6 +5,7 @@ import createHistory from 'history/createBrowserHistory'
 import Start from './Start'
 import Login from './Login'
 import OrderingForm from './components/OrderingForm'
+import CreateAccount from './components/CreateAccount'
 import OrderingOptions from './components/OrderingOptions'
 import RecipeViewer from './components/RecipeViewer'
 import ViewOrder from './components/ViewOrder'
@@ -79,6 +80,7 @@ class App extends Component {
             modalStatus={this.state.modalStatus}
             modalProps={this.state.modalProps}
             setModal={this.setModal}
+            setSnackbar={this.setSnackbar}
           />
           <Snackbar
             snackbarStatus={this.state.snackbarStatus}
@@ -93,6 +95,11 @@ class App extends Component {
           )} />
           <Route exact path="/start" render={() => (
             <Start
+              history={history}
+            />
+          )} />
+          <Route exact path="/createAccount" render={() => (
+            <CreateAccount
               history={history}
             />
           )} />
