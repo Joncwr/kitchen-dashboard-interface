@@ -1,7 +1,7 @@
 import React from 'react'
 import { Scrollbars } from 'react-custom-scrollbars'
 
-import OrdersHelper from '../../services/Orders/OrdersHelper.js'
+import { getOrders } from '../../services/api/orders'
 import UsersComponent from './UsersComponent'
 
 import './index.css'
@@ -26,39 +26,33 @@ class ViewOrder extends React.Component {
   }
 
   getOrders() {
-    OrdersHelper.getOrders()
-    .then(res => {
-      if (res.data) {
-        if (res.data.orders.length > 0) {
-          this.setState({data: res.data, hasNoOrders: false})
+    getOrders()
+      .then(res => {
+        if (res[0].orders.length > 0) {
+          this.setState({data: res[0], hasNoOrders: false})
         }
-        else {
-          this.setState({hasNoOrders: true})
-        }
-      }
-    })
-    .catch(err => console.log(err))
+        else this.setState({hasNoOrders: true})
+      })
+      .catch(err => console.log(err))
   }
 
   renderPreview() {
     if (this.state.data) {
-      if (this.state.data.orders.length > 0) {
-        return (
-          <div className="viewOrder-right-container">
-            <Scrollbars autoHide>
-              <UsersComponent
-                setEditableState={this.setEditableState}
-                isEditable={this.state.isEditable}
-                setOptionsAnimated={this.setOptionsAnimated}
-                isOptionsAnimated={this.state.isOptionsAnimated}
-                data={this.state.data}
-                getOrders={this.getOrders}
-                setSnackbar={this.props.setSnackbar}
-              />
-            </Scrollbars>
-          </div>
-        )
-      }
+      return (
+        <div className="viewOrder-right-container">
+          <Scrollbars autoHide>
+            <UsersComponent
+              setEditableState={this.setEditableState}
+              isEditable={this.state.isEditable}
+              setOptionsAnimated={this.setOptionsAnimated}
+              isOptionsAnimated={this.state.isOptionsAnimated}
+              data={this.state.data}
+              getOrders={this.getOrders}
+              setSnackbar={this.props.setSnackbar}
+            />
+          </Scrollbars>
+        </div>
+      )
     }
   }
 

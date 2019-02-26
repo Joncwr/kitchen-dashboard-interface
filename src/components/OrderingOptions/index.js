@@ -1,6 +1,6 @@
 import React from 'react'
 
-import OrdersHelper from '../../services/Orders/OrdersHelper.js'
+import { deleteLastOrder } from '../../services/api/orders'
 
 import './index.css'
 
@@ -18,15 +18,15 @@ class OrderingOptions extends React.Component {
       this.props.history.push('viewOrder')
     }
     else if (action === 'deleteLastOrder') {
-      OrdersHelper.deleteLastOrder()
-      .then(res => {
-        console.log(res);
-        let snackbarText = {
-          text: 'Last order has been successfully deleted.'
-        }
-        this.props.setSnackbar('show', snackbarText)
-      })
-      .catch(err => console.log(err))
+      deleteLastOrder()
+        .then(res => {
+          if (res === 'OK') this.props.setSnackbar('show', {
+            text: 'Last order has been successfully deleted.'
+          })
+        })
+        .catch(err => this.props.setSnackbar('show', {
+          text: 'An error has occurred'
+        }))
     }
   }
 

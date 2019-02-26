@@ -66,7 +66,7 @@ class App extends Component {
   }
 
   onExit() {
-    localStorage.removeItem('account')
+    localStorage.clear()
     history.push('/')
   }
 

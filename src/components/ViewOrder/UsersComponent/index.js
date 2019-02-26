@@ -1,6 +1,6 @@
 import React from 'react'
 
-import OrdersHelper from '../../../services/Orders/OrdersHelper.js'
+import { deleteOrder } from '../../../services/api/orders'
 import OrderComponent from '../../OrderingForm/OrderComponent'
 
 import './index.css'
@@ -59,24 +59,41 @@ class UsersComponent extends React.Component {
 
   editMode(index) {
     this.props.setEditableState(true)
-    this.setState({editIndex: index})
+    this.setState({editIndex: index},() => {
+
+      console.log(this.props.data.orders[this.state.editIndex]);
+    })
   }
 
   deleteOrder() {
     this.props.setOptionsAnimated(true)
-
-    OrdersHelper.deleteOrder(this.state.editIndex)
-    .then(res => {
-      this.setState({editIndex: ''},() => {
-        this.props.setEditableState('false')
-        this.props.getOrders()
-        let snackbarText = {
-          text: 'Selected order has been successfully deleted.'
-        }
-        this.props.setSnackbar('show', snackbarText)
+    let orderId = this.props.data.orders[this.state.editIndex].id
+    deleteOrder(orderId)
+      .then(res => {
+        this.setState({editIndex: ''},() => {
+          this.props.setEditableState('false')
+          this.props.getOrders()
+          this.props.setSnackbar('show', {
+            text: 'Selected order has been successfully deleted.'
+          })
+        })
       })
-    })
-    .catch(err => console.log(err))
+      .catch(err => this.props.setSnackbar('show', {
+        text: 'An error has occurred.'
+      }))
+
+    // OrdersHelper.deleteOrder(this.state.editIndex)
+    // .then(res => {
+    //   this.setState({editIndex: ''},() => {
+    //     this.props.setEditableState('false')
+    //     this.props.getOrders()
+    //     let snackbarText = {
+    //       text: 'Selected order has been successfully deleted.'
+    //     }
+    //     this.props.setSnackbar('show', snackbarText)
+    //   })
+    // })
+    // .catch(err => console.log(err))
   }
 
   renderEditMode(index) {
@@ -104,13 +121,17 @@ class UsersComponent extends React.Component {
     }
   }
 
+  componentDidMount() {
+    console.log(this.props.data);
+  }
+
   render() {
-    let { name } = this.props.data
+    let { username } = this.props.data
     return (
       <div className="usersComponent">
         <div className="usersComponent-nameContainer">
           <div className="usersComponent-nameContainer-name">
-            {name}
+            {username}
           </div>
         </div>
         <div className="usersComponent-orderComponentContainer">

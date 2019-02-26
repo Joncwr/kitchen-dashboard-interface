@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Auth from '../services/Auth.js'
+import { login } from '../services/auth/login'
 
 import './index.css'
 
@@ -17,19 +17,19 @@ class Login extends React.Component {
   }
 
   componentDidMount() {
-    // if (localStorage.getItem('account')) {
-    //   this.props.history.push('start')
-    // }
+    if (localStorage.getItem('user')) {
+      this.props.history.push('start')
+    }
   }
 
   onPress() {
-    Auth.authorizeUser(this.state.username, this.state.password)
+    login(this.state.username, this.state.password)
     .then(res => {
-      let account = {
-        username: this.state.username,
-        password: this.state.password
+      let userCredentials = {
+        userId: res.userDetails.id,
+        token: res.token
       }
-      localStorage.setItem('account', JSON.stringify(account))
+      localStorage.setItem('user', JSON.stringify(userCredentials))
       this.props.history.push('start')
     })
     .catch(err => console.log(err))
