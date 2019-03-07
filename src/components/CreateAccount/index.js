@@ -1,5 +1,8 @@
 import React from 'react'
 
+import ToggleButton from '../../common/ToggleButton'
+import { createUser, createHousehold } from '../../services/auth/admin'
+
 import './index.css'
 
 class CreateAccount extends React.Component {
@@ -9,6 +12,8 @@ class CreateAccount extends React.Component {
     this.state = {
       username: '',
       password: '',
+      household_name: '',
+      toggle: false,
     }
 
     this.onPress=this.onPress.bind(this)
@@ -16,7 +21,41 @@ class CreateAccount extends React.Component {
   }
 
   onPress() {
-
+    let { username, password, household_name } = this.state
+    if (username !== '' && password !== '' && household_name !== '') {
+      let toggleCreateHousehold = this.state.toggle
+      if (toggleCreateHousehold) {
+        createHousehold(username, password, household_name).then(res => {
+          if (res.data === 'OK') {
+            this.props.setSnackbar('show', {
+              text: 'Account and household has been created!'
+            })
+            this.props.history.push('/')
+          }
+          else this.props.setSnackbar('show', {
+            text: 'An error has occurred.'
+          })
+        })
+      }
+      else {
+        createUser(username, password, household_name).then(res => {
+          if (res.data.length > 0) {
+            this.props.setSnackbar('show', {
+               text: 'Account has been created!'
+             })
+             this.props.history.push('/')
+          }
+          else {
+            this.props.setSnackbar('show', {
+              text: this.state.household_name + ' was not found.'
+            })
+          }
+        })
+        .catch(err => this.props.setSnackbar('show', {
+          text: 'An error has occurred.'
+        }))
+      }
+    }
   }
 
   handleChange(event, index) {
@@ -71,17 +110,37 @@ class CreateAccount extends React.Component {
           <div className="createAccount-separater"/>
           <div className="createAccount-inputContainer">
             <div className="createAccount-inputContainer-header">
-              Household:
+              New Household?
+            </div>
+            <div className="createAccount-inputContainer-input">
+              <div className="createAccount-inputContainer-toggle" onClick={() => this.setState({toggle: !this.state.toggle})}>
+                <ToggleButton
+                  text='hi'
+                  toggle={this.state.toggle}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="createAccount-inputContainer">
+            <div className="createAccount-inputContainer-header">
+              Household name:
             </div>
             <div className="createAccount-inputContainer-input">
               <input
                 className='default-input'
                 placeholder='"Cool_gai_1990"'
                 maxLength={15}
-                name='household'
-                value={this.state.household}
+                name='household_name'
+                value={this.state.household_name}
                 onChange={this.handleChange}
               />
+            </div>
+          </div>
+          <div className="createAccount-inputContainer-button">
+            <div className="createAccount-inputContainer-button-container" onClick={this.onPress}>
+              <div className="default-button default-button--createAccount-button">
+                CREATE ACCOUNT
+              </div>
             </div>
           </div>
         </div>

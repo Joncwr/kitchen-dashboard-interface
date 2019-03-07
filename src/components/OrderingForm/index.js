@@ -184,10 +184,10 @@ class Ordering extends React.Component {
           *Please always view the web app after posting to see if theres any cutoff.*
         </div>
         <div className="ordering-options">
-          <div className="ordering-options-container-save" onClick={() => this.onSave()}>
+          <div className="default-button default-button--ordering-save" onClick={() => this.onSave()}>
             Save order!
           </div>
-          <div className="ordering-options-container-send" onClick={() => this.onSubmit()}>
+          <div className="default-button default-button--ordering-send" onClick={() => this.onSubmit()}>
             Send order!
           </div>
         </div>

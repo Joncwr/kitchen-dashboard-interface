@@ -101,6 +101,7 @@ class App extends Component {
           <Route exact path="/createAccount" render={() => (
             <CreateAccount
               history={history}
+              setSnackbar={this.setSnackbar}
             />
           )} />
           <Route exact path="/orderingoptions" render={() => (

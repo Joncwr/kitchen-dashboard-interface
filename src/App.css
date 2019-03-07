@@ -91,3 +91,16 @@ input {
     padding: 0 10px;
     text-align: center;
 }
+
+.default-button {
+    height: 80px;
+    width: 300px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000;
+    font-size: 35px;
+    font-family: 'Staatliches';
+    border: 5px solid #303030;
+}

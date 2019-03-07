@@ -85,25 +85,11 @@
   box-sizing: border-box;
 }
 
-.ordering-options-container-save,
-.ordering-options-container-send {
-  height: 80px;
-  width: 300px;
-  border-radius: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #000;
-  font-size: 35px;
-  font-family: 'Staatliches';
-  border: 5px solid #303030;
-}
-
-.ordering-options-container-save {
+.default-button.default-button--ordering-save {
   background-color: #99ffff;
 }
 
-.ordering-options-container-send {
+.default-button.default-button--ordering-send {
   background-color: #ff944d;
 }
 
